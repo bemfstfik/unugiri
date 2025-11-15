@@ -1,0 +1,92 @@
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Dokumentasi | BEM FST & FIK</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+
+  <body class="bg-gray-50">
+    <div id="navbar"></div>
+
+    <main class="flex-grow max-w-7xl mx-auto px-6 pb-16">
+      <nav aria-label="breadcrumb" class="bg-white rounded-xl shadow-lg max-w-3xl mx-auto mt-6">
+        <ol class="flex items-center gap-1 text-gray-700 font-semibold text-lg rounded-xl px-6 py-4">
+          <a href="/"><li>Beranda</li></a>
+          <li class="text-[#5A007A]">›</li>
+          <li><span class="text-[#C26CFF]"> Dokumentasi </span></li>
+        </ol>
+      </nav>
+
+      <section class="max-w-4xl mt-10 mx-auto">
+        <div class="flex justify-start">
+          <div class="w-[300px] text-center py-1 rounded-r-md text-white font-bold text-lg" style="background: linear-gradient(to right, #c26cff00, #d05af4, #da5af4, #c26cff00)">Dokumentasi</div>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-xl p-6 mt-6">
+          <!-- SCROLL WRAPPER -->
+          <div class="overflow-x-auto">
+            <table id="docTable" class="display stripe hover w-full min-w-[600px]"></table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      $(document).ready(function () {
+        $("#docTable").DataTable({
+          ajax: {
+            url: "https://script.google.com/macros/s/AKfycbwaxBhNQmrPpF5DiK_o2D0zaazB_J-MNvyVVOUQL64UPf10NuqlTaeCuqDLi6N5Lw-LkA/exec",
+            dataSrc: "",
+          },
+
+          // TIDAK pakai responsive collapse
+          responsive: false,
+
+          scrollX: true, // penting agar table bisa digeser
+
+          columns: [
+            {
+              title: "Tanggal",
+              data: "tanggal",
+              render: function (data) {
+                const d = new Date(data);
+                return d.toLocaleDateString("id-ID", {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                });
+              },
+            },
+            { title: "Nama Acara", data: "acara" },
+            {
+              title: "Link Drive",
+              data: "link",
+              render: function (data) {
+                return `
+                  <a href="${data}" target="_blank"
+                    class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg">
+                    Buka Drive
+                  </a>
+                `;
+              },
+            },
+          ],
+        });
+      });
+    </script>
+
+    <div id="footer"></div>
+    <script src="/assets/js/footernavbar.js"></script>
+  </body>
+</html>

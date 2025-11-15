@@ -1,0 +1,63 @@
+<style>
+  /* Fade-in + Slide-up */
+  @keyframes fadeSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .fade-slide-up {
+    animation: fadeSlideUp 0.8s ease-out forwards;
+  }
+
+  /* Soft glow logo */
+  @keyframes softGlow {
+    0% {
+      filter: drop-shadow(0 0 0px rgba(144, 11, 183, 0));
+    }
+    50% {
+      filter: drop-shadow(0 0 10px rgba(144, 11, 183, 0.5));
+    }
+    100% {
+      filter: drop-shadow(0 0 0px rgba(144, 11, 183, 0));
+    }
+  }
+  .logo-glow {
+    animation: softGlow 3.5s ease-in-out infinite;
+  }
+
+  /* Hover effect halus */
+  .logo-hover {
+    transition: 0.3s ease;
+  }
+  .logo-hover:hover {
+    transform: scale(1.06);
+  }
+
+  /* Text shimmer lembut (sangat subtle) */
+  @keyframes subtleShimmer {
+    0%,
+    100% {
+      opacity: 0.9;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  .text-shimmer {
+    animation: subtleShimmer 6s ease-in-out infinite;
+  }
+</style>
+
+<header class="flex items-center justify-center gap-3 px-6 py-4 max-w-7xl mx-auto fade-slide-up">
+  <img alt="Logo" class="w-14 h-14 object-contain logo-glow logo-hover" src="/assets/images/KABINET.png.png" />
+
+  <div class="text-sm font-extrabold leading-tight text-black text-center text-shimmer">
+    <p>BADAN EKSEKUTIF MAHASISWA</p>
+    <p>KABINET DHARMA JATI</p>
+  </div>
+</header>

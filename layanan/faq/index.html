@@ -1,0 +1,112 @@
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>FAQ | BEM FST & FIK</title>
+    <link rel="icon" type="image/png" href="/assets/images/KABINET.png.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+
+  <!-- start nav -->
+  <div id="navbar"></div>
+  <!-- end nav -->
+
+  <main class="flex-grow max-w-7xl mx-auto px-6 pb-16">
+    <!-- breadcrumb -->
+    <nav aria-label="breadcrumb" class="bg-white rounded-xl shadow-[8px_8px_10px_rgba(90,0,122,0.3)] max-w-3xl mx-auto mt-6">
+      <ol class="flex items-center gap-1 text-gray-700 font-semibold text-lg rounded-xl px-6 py-4">
+        <a href="/"><li>Beranda</li></a>
+        <li class="text-[#5A007A]">›</li>
+        <li class="text-[#5A007A]">Layanan</li>
+        <li><span class="text-[#C26CFF]"> › FAQ </span></li>
+      </ol>
+    </nav>
+
+    <!-- container start -->
+    <section class="max-w-4xl mt-10 mx-auto space-y-10">
+      <!-- TITLE -->
+      <div>
+        <div class="flex justify-start">
+          <div class="w-[500px] text-center py-1 rounded-r-md text-white font-bold text-lg" style="background: linear-gradient(to right, #c26cff00, #d05af4, #da5af4, #c26cff00)">Frequently Asked Questions (FAQ)</div>
+        </div>
+
+        <p class="mt-6 text-center text-gray-600 text-sm sm:text-base font-normal leading-relaxed px-4 sm:px-0 max-w-[600px] mx-auto">
+          Berikut adalah pertanyaan yang sering diajukan terkait BEM FST & FIK, kegiatan, dan layanan organisasi.
+        </p>
+      </div>
+
+      <!-- FAQ ACCORDION -->
+      <div class="space-y-4">
+        <!-- FAQ ITEM -->
+        <div class="border border-purple-200 rounded-xl">
+          <button class="w-full flex justify-between items-center px-4 py-3 text-left font-semibold text-[#5A007A] toggle-faq">
+            Apa itu BEM FST & FIK?
+            <i class="fas fa-chevron-down text-sm transition-all"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-gray-600 text-sm">
+            BEM FST & FIK adalah organisasi eksekutif mahasiswa tingkat fakultas yang bertugas menjalankan program kerja, mengawal aspirasi, serta menjadi wadah pengembangan diri mahasiswa di lingkungan Fakultas Sains & Teknologi dan
+            Fakultas Ilmu Kesehatan UNUGIRI.
+          </div>
+        </div>
+
+        <div class="border border-purple-200 rounded-xl">
+          <button class="w-full flex justify-between items-center px-4 py-3 text-left font-semibold text-[#5A007A] toggle-faq">
+            Bagaimana cara menyampaikan aspirasi?
+            <i class="fas fa-chevron-down text-sm transition-all"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-gray-600 text-sm">
+            Aspirasi dapat disampaikan melalui Form Aspirasi yang tersedia di website ini atau melalui kontak resmi BEM FST & FIK. Kami akan menindaklanjuti setiap aspirasi secara profesional dan transparan.
+          </div>
+        </div>
+
+        <div class="border border-purple-200 rounded-xl">
+          <button class="w-full flex justify-between items-center px-4 py-3 text-left font-semibold text-[#5A007A] toggle-faq">
+            Apa saja program kerja BEM FST & FIK?
+            <i class="fas fa-chevron-down text-sm transition-all"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-gray-600 text-sm">
+            Program kerja meliputi kegiatan akademik, pengabdian masyarakat, pengembangan minat bakat, pelatihan, seminar, kegiatan sosial, hingga kolaborasi antar organisasi di lingkungan fakultas.
+          </div>
+        </div>
+
+        <div class="border border-purple-200 rounded-xl">
+          <button class="w-full flex justify-between items-center px-4 py-3 text-left font-semibold text-[#5A007A] toggle-faq">
+            Siapa saja yang dapat mengikuti kegiatan BEM?
+            <i class="fas fa-chevron-down text-sm transition-all"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-gray-600 text-sm">Seluruh mahasiswa aktif FST & FIK dapat mengikuti kegiatan BEM tanpa terkecuali, baik kegiatan formal maupun non-formal.</div>
+        </div>
+
+        <div class="border border-purple-200 rounded-xl">
+          <button class="w-full flex justify-between items-center px-4 py-3 text-left font-semibold text-[#5A007A] toggle-faq">
+            Bagaimana cara bergabung menjadi pengurus BEM?
+            <i class="fas fa-chevron-down text-sm transition-all"></i>
+          </button>
+          <div class="faq-content hidden px-4 pb-4 text-gray-600 text-sm">Rekrutmen dilakukan satu kali dalam setahun melalui Open Recruitment (OPREC). Informasi resmi akan diumumkan melalui media sosial dan website BEM FST & FIK.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- footer start -->
+  <div id="footer"></div>
+  <script src="/assets/js/footernavbar.js"></script>
+
+  <!-- FAQ SCRIPT -->
+  <script>
+    const toggles = document.querySelectorAll(".toggle-faq");
+
+    toggles.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector("i");
+
+        content.classList.toggle("hidden");
+        icon.classList.toggle("rotate-180");
+      });
+    });
+  </script>
+</html>

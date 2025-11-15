@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Daftar | BEM FST & FIK</title>
+    <link rel="icon" type="image/png" href="/assets/images/KABINET.png.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+
+  <body class="bg-white font-inter">
+    <!-- start nav -->
+    <div id="navbar"></div>
+    <!-- end nav -->
+
+    <main class="flex-grow max-w-7xl mx-auto px-6 pb-16">
+      <!-- breadcrumb -->
+      <nav aria-label="breadcrumb" class="bg-white rounded-xl shadow-[8px_8px_10px_rgba(90,0,122,0.3)] max-w-3xl mx-auto mt-6">
+        <ol class="flex items-center gap-1 text-gray-700 font-semibold text-lg rounded-xl px-6 py-4">
+          <a href="/"><li>Beranda</li></a>
+          <li class="text-[#5A007A]">›</li>
+          <li><span class="text-[#C26CFF]"> List Acara </span></li>
+        </ol>
+      </nav>
+
+      <!-- container start -->
+      <section class="max-w-4xl mt-10 mx-auto space-y-10">
+        <!-- Judul -->
+        <div class="flex justify-start">
+          <div class="w-[500px] text-center py-1 rounded-r-md text-white font-bold text-lg" style="background: linear-gradient(to right, #c26cff00, #d05af4, #da5af4, #c26cff00)">Daftar Acara</div>
+        </div>
+
+        <!-- === EVENT LIST START === -->
+        <div class="space-y-6">
+          <!-- Event Card 1 -->
+          <div class="border border-purple-200 shadow-md rounded-xl p-5 bg-white hover:shadow-xl transition-all duration-300">
+            <h3 class="text-xl font-semibold text-purple-700">Wawancara</h3>
+            <p class="text-gray-600 mt-2">Tanggal Mulai: <span class="font-semibold">07 November 2025</span></p>
+
+            <div class="mt-4">
+              <a class="inline-block px-5 py-2 bg-gray-400 text-white font-semibold rounded-lg opacity-70 cursor-not-allowed pointer-events-none"> Pendaftaran Ditutup </a>
+            </div>
+          </div>
+
+          <!-- Event Card 2 -->
+          <div class="border border-purple-200 shadow-md rounded-xl p-5 bg-white hover:shadow-xl transition-all duration-300">
+            <h3 class="text-xl font-semibold text-purple-700">LKMTD</h3>
+            <p class="text-gray-600 mt-2">Tanggal Mulai: <span class="font-semibold">-</span></p>
+
+            <div class="mt-4">
+              <a class="inline-block px-5 py-2 bg-gray-400 text-white font-semibold rounded-lg opacity-70 cursor-not-allowed pointer-events-none"> Segera Hadir </a>
+            </div>
+          </div>
+
+          <!-- Event Card 3 -->
+          <!-- <div class="border border-purple-200 shadow-md rounded-xl p-5 bg-white hover:shadow-xl transition-all duration-300">
+            <h3 class="text-xl font-semibold text-purple-700">Pelatihan Public Speaking</h3>
+            <p class="text-gray-600 mt-2">Tanggal Mulai: <span class="font-semibold">20 Januari 2026</span></p>
+
+            <div class="mt-4">
+              <a href="https://forms.gle/xxxxxx" class="inline-block px-5 py-2 bg-purple-600 text-white font-semibold rounded-lg transform transition-all duration-500 hover:rotate-[360deg] hover:bg-purple-700"> Daftar Sekarang </a>
+            </div>
+          </div> -->
+        </div>
+        <!-- === EVENT LIST END === -->
+      </section>
+    </main>
+
+    <!-- footer start -->
+    <div id="footer"></div>
+
+    <script src="/assets/js/footernavbar.js"></script>
+  </body>
+</html>

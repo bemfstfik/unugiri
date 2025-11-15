@@ -1,0 +1,434 @@
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Beranda | BEM FST & FIK</title>
+  <link rel="icon" type="image/png" href="/assets/images/KABINET.png.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+
+<body class="bg-gradient-to-b from-[#EED7FF] to-white min-h-screen flex flex-col">
+  <!-- Header -->
+  <div id="navbar"></div>
+  <!-- Hero Section -->
+<div class="w-full flex justify-center px-6 md:px-20 pt-10">
+  <section class="flex flex-col md:flex-row items-center justify-between max-w-7xl gap-8 md:gap-12 w-full">
+    
+    <!-- ========= TEXT ========= -->
+    <div class="flex-1 max-w-xl relative">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight fade-up">
+        SELAMAT DATANG DI
+      </h1>
+
+      <h2 class="text-4xl md:text-5xl font-extrabold gradient-shimmer leading-tight mt-1 md:mt-2 fade-up delay-1">
+        BEM FST & FIK
+      </h2>
+
+      <p class="text-sm md:text-base text-gray-600 mt-4 md:mt-6 leading-relaxed fade-up delay-2">
+        BEM FST & FIK Universitas Nahdlatul Ulama Sunan Giri adalah lembaga eksekutif mahasiswa
+        yang berperan dalam mengembangkan kreativitas, mengawal aspirasi, dan mewujudkan kegiatan
+        positif di lingkungan fakultas.
+      </p>
+    </div>
+
+    <!-- ========= IMAGE ========= -->
+    <div class="flex-1 max-w-md relative px-6 mt-5 md:px-5">
+      <div class="relative rounded-xl overflow-hidden shadow-xl h-[440px] md:h-[550px] aspect-[4/5]
+                  tilt-card float-img image-card">
+
+        <div class="absolute inset-0 z-0">
+          <img src="/assets/images/background.png"
+               class="w-full h-full object-cover" />
+        </div>
+
+        <img id="officerImage" src="/assets/images/Gubernur-removebg-preview.png"
+             class="w-full h-full object-contain absolute top-5 left-0 z-10" />
+
+        <!-- TEXT OVERLAY -->
+        <div class="absolute inset-0 z-20 flex flex-col justify-end">
+          <div class="bg-gradient-to-t from-black/80 to-transparent w-full">
+            <div class="text-white text-center">
+
+              <p id="officerName"
+                 class="text-sm md:text-base font-bold tracking-wider py-2"
+                 style="background: linear-gradient(to right, #f4b05a00, #d05af4, #e25af4, #f4b05a00)">
+                Ragil Susilo Utomo
+              </p>
+
+              <p id="officerTitle"
+                 class="text-xs md:text-sm font-semibold tracking-wider py-2"
+                 style="background: linear-gradient(to right, #ffffff00, #000000, #000000, #ffffff00)">
+                Gubernur BEM FST & FIK
+              </p>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+</div>
+  </section>
+  </div>
+
+<div class="w-full flex justify-center mt-16 px-6">
+  <a href="/list-acara/" target="_blank" rel="noopener noreferrer"
+    class="w-full max-w-xs bg-white border border-[#900BB7] text-[#900BB7]
+           shadow-[4px_4px_10px_rgba(144,11,183,0.5)]
+           rounded-full px-3 py-2 flex items-center justify-center gap-2
+           text-xs md:text-sm font-semibold transition-all duration-300
+           hover:bg-[#900BB7] hover:text-white hover:scale-110 hover:shadow-[0_0_20px_#900BB7]
+           animate-float">
+    <i class="fas fa-clipboard-check text-lg"></i>
+    <span>Pendaftaran Acara</span>
+  </a>
+</div>
+
+
+  <!-- Informasi Layanan Umum -->
+<section class="px-10 md:px-20 mt-16">
+  <h3 class="w-full text-center text-gray-700 text-2xl md:text-3xl font-semibold mb-6">
+    Informasi
+    <span class="text-[#900BB7]">BEM FST & FIK</span>
+  </h3>
+  <p class="text-center text-gray-600 text-xs sm:text-sm leading-snug mb-5">
+    Beragam informasi dan layanan kemahasiswaan yang dapat membantu mahasiswa dalam berorganisasi dan beraktivitas.
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-6 md:mt-5">
+
+    <!-- CARD 1 -->
+    <div class="w-full flex justify-center px-6 card-float">
+      <a href="/layanan/visi-misi/"
+        class="text-center max-w-[200px] transition-all duration-300 transform hover:scale-110 glow-hover cursor-pointer group block icon-spin">
+
+        <div class="bg-[#900BB7] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md group-hover:shadow-xl">
+          <i class="fas fa-tasks text-white text-2xl"></i>
+        </div>
+
+        <h3 class="font-semibold text-gray-900 text-lg mb-2">Visi & Misi</h3>
+        <p class="text-gray-600 text-xs sm:text-sm leading-snug">
+          Gambaran visi organisasi dan misi strategis BEM dalam menjalankan perannya.
+        </p>
+      </a>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="w-full flex justify-center px-6 mt-0 md:mt-20 card-float">
+      <a href="/layanan/anggota/"
+        class="text-center max-w-[200px] transition-all duration-300 transform hover:scale-110 glow-hover cursor-pointer group block icon-spin">
+
+        <div class="bg-[#900BB7] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md group-hover:shadow-xl">
+          <i class="fas fa-users text-white text-2xl"></i>
+        </div>
+
+        <h3 class="font-semibold text-gray-900 text-lg mb-2">Anggota</h3>
+        <p class="text-gray-600 text-xs sm:text-sm leading-snug">
+          Lihat daftar anggota BEM serta departemen yang mereka jalankan.
+        </p>
+      </a>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="w-full flex justify-center px-6 mt-0 md:mt-20 card-float">
+      <a href="/layanan/roadmap/"
+        class="text-center max-w-[200px] transition-all duration-300 transform hover:scale-110 glow-hover cursor-pointer group block icon-spin">
+
+        <div class="bg-[#900BB7] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md group-hover:shadow-xl">
+          <i class="fas fa-route text-white text-2xl"></i>
+        </div>
+
+        <h3 class="font-semibold text-gray-900 text-lg mb-2">Roadmap Proker</h3>
+        <p class="text-gray-600 text-xs sm:text-sm leading-snug">
+          Rangkaian tahapan program kerja BEM selama satu periode kepengurusan.
+        </p>
+      </a>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="w-full flex justify-center px-6 card-float">
+      <a href="/layanan/faq"
+        class="text-center max-w-[200px] transition-all duration-300 transform hover:scale-110 glow-hover cursor-pointer group block icon-spin">
+
+        <div class="bg-[#900BB7] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 shadow-md group-hover:shadow-xl">
+          <i class="fas fa-question-circle text-white text-2xl"></i>
+        </div>
+
+        <h3 class="font-semibold text-gray-900 text-lg mb-2">FAQ</h3>
+        <p class="text-gray-600 text-xs sm:text-sm leading-snug">
+          Kumpulan pertanyaan yang sering diajukan seputar BEM FST & FIK.
+        </p>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- prodi -->
+<section class="w-full px-4 sm:px-6 md:px-20 mt-10">
+  <h3 class="w-full text-center text-gray-700 text-2xl md:text-3xl font-semibold mb-4">
+    Informasi Prodi
+    <span class="text-[#900BB7]">FST & FIK</span>
+  </h3>
+
+  <p class="text-center text-gray-600 text-xs sm:text-sm leading-snug mb-6">
+    Temukan informasi program studi yang berada di bawah Fakultas Sains dan Teknologi serta Fakultas Ilmu Kesehatan.
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+
+    <a href="https://ti.unugiri.ac.id/"
+      class="tilt card-animate icon-float w-full bg-white rounded-xl shadow-[4px_8px_10px_rgba(144,11,183,0.5)] 
+             px-6 py-6 sm:px-10 sm:py-5 flex flex-col items-center gap-2 
+             text-sm sm:text-base font-semibold text-gray-700">
+      <i class="fas fa-laptop-code text-2xl sm:text-3xl"></i>
+      <span>Teknik Informatika</span>
+    </a>
+
+    <a href="https://si.unugiri.ac.id/"
+      class="tilt card-animate icon-float w-full bg-white rounded-xl shadow-[4px_8px_10px_rgba(144,11,183,0.5)] 
+             px-6 py-6 sm:px-10 sm:py-5 flex flex-col items-center gap-2 
+             text-sm sm:text-base font-semibold text-gray-700">
+      <i class="fas fa-database text-2xl sm:text-3xl"></i>
+      <span>Sistem Informasi</span>
+    </a>
+
+    <a href="https://sk.unugiri.ac.id/"
+      class="tilt card-animate icon-float w-full bg-white rounded-xl shadow-[4px_8px_10px_rgba(144,11,183,0.5)] 
+             px-6 py-6 sm:px-10 sm:py-5 flex flex-col items-center gap-2 
+             text-sm sm:text-base font-semibold text-gray-700">
+      <i class="fas fa-microchip text-2xl sm:text-3xl"></i>
+      <span>Sistem Komputer</span>
+    </a>
+
+    <a href="https://statistika.unugiri.ac.id/"
+      class="tilt card-animate icon-float w-full bg-white rounded-xl shadow-[4px_8px_10px_rgba(144,11,183,0.5)] 
+             px-6 py-6 sm:px-10 sm:py-5 flex flex-col items-center gap-2 
+             text-sm sm:text-base font-semibold text-gray-700">
+      <i class="fas fa-chart-bar text-2xl sm:text-3xl"></i>
+      <span class="text-center">Statistika dan Sains Data</span>
+    </a>
+
+    <a href="https://tm.unugiri.ac.id/"
+      class="tilt card-animate icon-float w-full bg-white rounded-xl shadow-[4px_8px_10px_rgba(144,11,183,0.5)] 
+             px-6 py-6 sm:px-10 sm:py-5 flex flex-col items-center gap-2 
+             text-sm sm:text-base font-semibold text-gray-700">
+      <i class="fas fa-cog text-2xl sm:text-3xl"></i>
+      <span>Teknik Mesin</span>
+    </a>
+
+    <a href="/antrian-online/"
+      class="tilt card-animate icon-float w-full bg-white rounded-xl shadow-[4px_8px_10px_rgba(144,11,183,0.5)] 
+             px-6 py-6 sm:px-10 sm:py-5 flex flex-col items-center gap-2 
+             text-sm sm:text-base font-semibold text-gray-700">
+      <i class="fas fa-flask text-2xl sm:text-3xl"></i>
+      <span>Farmasi</span>
+    </a>
+
+  </div>
+</section>
+
+
+
+
+<!-- Galeri Section -->
+<section class="w-full px-6 md:px-20 mt-16">
+
+  <!-- Judul -->
+  <div class="flex justify-end mb-4">
+    <div class="w-[300px] text-center py-1 rounded-r-md text-white font-bold text-lg 
+         float-gz"
+      style="background: linear-gradient(to right, #f4b05a00, #d05af4, #da5af4, #f4b05a00)">
+      Galeri
+    </div>
+  </div>
+
+  <!-- Container Galeri -->
+  <div class="relative">
+
+    <div id="gallery-container"
+      class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-6 
+             border border-gray-300 rounded-lg p-6 mt-4 hide-scrollbar">
+
+      <!-- JS-mu akan menampilkan gambar -->
+      <!-- Tambahkan class tilt-genz + gallery-img ke setiap foto -->
+    </div>
+
+    <!-- Prev -->
+    <button id="prev-btn"
+      class="galeri-nav absolute left-2 top-1/2 -translate-y-1/2 
+             bg-gradient-to-br from-purple-500 to-pink-500 text-white 
+             rounded-full w-10 h-10 flex items-center justify-center 
+             hover:scale-110 hover:brightness-110 transition z-10 shadow-lg">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <!-- Next -->
+    <button id="next-btn"
+      class="galeri-nav absolute right-2 top-1/2 -translate-y-1/2 
+             bg-gradient-to-br from-purple-500 to-pink-500 text-white 
+             rounded-full w-10 h-10 flex items-center justify-center 
+             hover:scale-110 hover:brightness-110 transition z-10 shadow-lg">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+  </div>
+
+  <!-- Button Selengkapnya -->
+  <div class="flex justify-center mt-8">
+    <a href="/drive/"
+      class="group relative inline-flex items-center gap-3 px-8 py-3 rounded-full 
+             bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 
+             text-white font-semibold shadow-lg hover:shadow-[0_0_20px_rgba(255,100,200,0.6)]
+             hover:scale-105 active:scale-95 transition duration-300">
+
+      <!-- Camera icon dengan bounce + spin -->
+      <span class="inline-flex camera-anim items-center justify-center w-9 h-9 
+                   rounded-full bg-white/20 transform transition-transform 
+                   duration-700 group-hover:rotate-[360deg]">
+        <i class="fas fa-camera text-white"></i>
+      </span>
+
+      <span class="text-base tracking-wide">Selengkapnya Galeri</span>
+
+      <span class="absolute inset-0 rounded-full bg-white opacity-0 
+                   group-hover:opacity-10 transition"></span>
+    </a>
+  </div>
+</section>
+
+
+<!-- OPTIONAL: CSS untuk sembunyikan scrollbar -->
+<style>
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<!-- Nav button JS -->
+<script>
+  document.getElementById("prev-btn").onclick = function () {
+    document.getElementById("gallery-container").scrollBy({
+      left: -300,
+      behavior: "smooth",
+    });
+  };
+
+  document.getElementById("next-btn").onclick = function () {
+    document.getElementById("gallery-container").scrollBy({
+      left: 300,
+      behavior: "smooth",
+    });
+  };
+</script>
+
+
+
+  <!-- Tombol Layanan 110 -->
+<div class="fixed bottom-6 left-6 z-50">
+  <button
+    id="layanan110Btn"
+    class="bg-[#900BB7] hover:bg-[#6A008C] text-white font-bold py-3 px-5 rounded-full shadow-lg
+           transition-all flex items-center gap-2 group tilt-btn btn-float btn-glow"
+  >
+    <!-- Ikon megaphone dengan spin + bounce -->
+    <span
+      class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/20
+             transform transition-transform duration-700 group-hover:rotate-[360deg] icon-bounce"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 8.25V5.25L20.25 3V21L15 18.75V15.75M15 8.25C15 10.3211 13.3211 12 11.25 12H8.25V12V12C6.17893 12 4.5 10.3211 4.5 8.25V8.25V8.25C4.5 6.17893 6.17893 4.5 8.25 4.5H11.25C13.3211 4.5 15 6.17893 15 8.25ZM8.25 12V19.5" />
+      </svg>
+    </span>
+
+    Aspirasi
+  </button>
+</div>
+
+
+
+<!-- Modal -->
+<div
+  id="layanan110Modal"
+  class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+>
+<div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+  <div class="p-6">
+    <h2 class="text-xl font-bold mb-4 text-[#900BB7]">Layanan Aspirasi</h2>
+
+    <p class="mb-4 text-gray-700">
+      Fasilitas ini disediakan sebagai sarana bagi seluruh mahasiswa untuk menyampaikan aspirasi, kritik, saran, atau laporan terkait berbagai isu dan pelayanan di lingkungan kampus. Gunakanlah saluran ini untuk membantu pihak kampus meningkatkan kualitas pelayanan dan menyelesaikan keluh kesah Anda.
+    </p>
+
+    <div class="flex justify-between">
+      <a
+        href="/aspirasi/"
+        class="bg-[#900BB7] hover:bg-[#6A008C] text-white py-2 px-4 rounded font-semibold"
+      >
+        Kirim Aspirasi
+      </a>
+
+      <button
+        id="closeModalBtn"
+        class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded"
+      >
+        Tutup
+      </button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const layanan110Btn = document.getElementById('layanan110Btn');
+    const layanan110Modal = document.getElementById('layanan110Modal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    // Buka modal
+    layanan110Btn.addEventListener('click', () => {
+      layanan110Modal.classList.remove('hidden');
+    });
+
+    // Tutup modal
+    closeModalBtn.addEventListener('click', () => {
+      layanan110Modal.classList.add('hidden');
+    });
+
+    // Tutup saat klik di luar modal
+    layanan110Modal.addEventListener('click', (e) => {
+      if (e.target === layanan110Modal) {
+        layanan110Modal.classList.add('hidden');
+      }
+    });
+  });
+</script>
+
+
+  <!-- Footer -->
+  <div id="footer"></div>
+  <script src="/assets/js/footernavbar.js"></script>
+  <!-- galleryJS -->
+  <script src="/assets/js/gallery.js"></script>
+  <!-- search.js -->
+  <script src="/assets/js/search.js"></script>
+
+  <!-- kapolres kapolda gonta ganti -->
+  <script src="/assets/js/hero.js"></script>
+</body>
+
+</html>

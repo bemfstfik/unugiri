@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Aspirasi Mahasiswa | BEM FST & FIK</title>
+
+    <link rel="icon" type="image/png" href="/assets/images/KABINET.png.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      body.modal-open {
+        overflow: hidden !important;
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.25s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-gradient-to-b from-[#EED7FF] to-white min-h-screen">
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN WRAPPER -->
+    <main class="flex-grow max-w-7xl mx-auto px-6 pb-20">
+      <!-- breadcrumb -->
+      <nav aria-label="breadcrumb" class="bg-white rounded-xl shadow-[8px_8px_10px_rgba(90,0,122,0.3)] max-w-3xl mx-auto mt-6">
+        <ol class="flex items-center gap-1 text-gray-700 font-semibold text-lg rounded-xl px-6 py-4">
+          <a href="/"><li>Beranda</li></a>
+          <li><span class="text-[#C26CFF]"> › Aspirasi </span></li>
+        </ol>
+      </nav>
+
+      <!-- CONTENT -->
+      <section class="max-w-4xl w-full mx-auto mt-10 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-center font-extrabold text-3xl sm:text-4xl text-gray-800 mb-1">
+          Aspirasi
+          <span class="text-[#5A007A]"> Mahasiswa </span>
+        </h1>
+
+        <p class="text-center text-gray-600 mb-8 text-sm sm:text-base">Silakan isi form berikut untuk menyampaikan aspirasi Anda. Semua data dan privasi Anda terjamin aman serta tidak akan disebarluaskan.</p>
+
+        <!-- FORM -->
+        <form id="aspirasiForm" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+          <input required name="nama" type="text" placeholder="Nama Lengkap" class="border border-[#5A007A] rounded-lg py-2 px-3 text-sm text-[#5A007A] placeholder-[#5A007A] focus:outline-none focus:ring-2 focus:ring-[#C26CFF]" />
+
+          <input required name="nim" type="text" placeholder="NIM" class="border border-[#5A007A] rounded-lg py-2 px-3 text-sm text-[#5A007A] placeholder-[#5A007A] focus:outline-none focus:ring-2 focus:ring-[#C26CFF]" />
+
+          <select required name="prodi" class="col-span-1 sm:col-span-2 border border-[#5A007A] rounded-lg py-2 px-3 text-sm text-[#5A007A] focus:outline-none focus:ring-2 focus:ring-[#C26CFF]">
+            <option disabled selected value="">Pilih Program Studi</option>
+            <option value="TI">Teknik Informatika</option>
+            <option value="SI">Sistem Informasi</option>
+            <option value="SK">Sistem Komputer</option>
+            <option value="SSD">Statistika & Sains Data</option>
+            <option value="TM">Teknik Mesin</option>
+            <option value="Farmasi">Farmasi</option>
+          </select>
+
+          <textarea
+            required
+            name="aspirasi"
+            placeholder="Tulis aspirasi Anda di sini..."
+            class="col-span-1 sm:col-span-2 border border-[#5A007A] rounded-lg py-3 px-3 h-32 text-sm text-[#5A007A] placeholder-[#5A007A] focus:outline-none focus:ring-2 focus:ring-[#C26CFF]"
+          ></textarea>
+
+          <!-- BUTTON -->
+          <div class="col-span-1 sm:col-span-2 flex justify-center">
+            <button type="submit" class="bg-[#5A007A] text-white font-semibold py-2 px-6 rounded-lg hover:bg-[#47005F] transition">Kirim Aspirasi</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition duration-200">
+      <div class="bg-white w-11/12 max-w-sm rounded-2xl p-6 shadow-xl text-center animate-fadeIn">
+        <i class="fas fa-check-circle text-green-500 text-6xl mb-3"></i>
+
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Aspirasi Terkirim!</h2>
+
+        <p class="text-gray-600 text-sm mb-6">Terima kasih, aspirasi Anda telah berhasil disimpan.</p>
+
+        <button id="closeModal" class="bg-[#5A007A] text-white px-4 py-2 rounded-lg hover:bg-[#47005F] transition">Tutup</button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+    <script src="/assets/js/footernavbar.js"></script>
+
+    <!-- SUBMIT SCRIPT -->
+    <script>
+      const form = document.getElementById("aspirasiForm");
+      const modal = document.getElementById("successModal");
+      const closeModal = document.getElementById("closeModal");
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const url =
+          "https://script.google.com/macros/s/AKfycbwRDQx7QdyrL9ZC4WFFHKFrWjYkfkCPrVKPYfxmpTC42a6Jr5zT70o8db-9FAMg5c5s/exec?" +
+          new URLSearchParams({
+            nama: form.nama.value,
+            nim: form.nim.value,
+            prodi: form.prodi.value,
+            aspirasi: form.aspirasi.value,
+          });
+
+        const res = await fetch(url);
+        const text = await res.text();
+
+        if (text.trim() === "OK") {
+          modal.classList.remove("opacity-0", "pointer-events-none");
+          document.body.classList.add("modal-open");
+          form.reset();
+        }
+      });
+
+      closeModal.addEventListener("click", () => {
+        modal.classList.add("opacity-0", "pointer-events-none");
+        document.body.classList.remove("modal-open");
+      });
+    </script>
+  </body>
+</html>
