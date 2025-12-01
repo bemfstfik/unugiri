@@ -76,9 +76,12 @@
             class="col-span-1 sm:col-span-2 border border-[#5A007A] rounded-lg py-3 px-3 h-32 text-sm text-[#5A007A] placeholder-[#5A007A] focus:outline-none focus:ring-2 focus:ring-[#C26CFF]"
           ></textarea>
 
-          <!-- BUTTON -->
+          <!-- BUTTON + SPINNER -->
           <div class="col-span-1 sm:col-span-2 flex justify-center">
-            <button type="submit" class="bg-[#5A007A] text-white font-semibold py-2 px-6 rounded-lg hover:bg-[#47005F] transition">Kirim Aspirasi</button>
+            <button id="submitBtn" type="submit" class="bg-[#5A007A] text-white font-semibold py-2 px-6 rounded-lg hover:bg-[#47005F] transition flex items-center gap-2">
+              <span id="submitText">Kirim Aspirasi</span>
+              <span id="spinner" class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            </button>
           </div>
         </form>
       </section>
@@ -107,8 +110,17 @@
       const modal = document.getElementById("successModal");
       const closeModal = document.getElementById("closeModal");
 
+      const submitBtn = document.getElementById("submitBtn");
+      const submitText = document.getElementById("submitText");
+      const spinner = document.getElementById("spinner");
+
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
+
+        // SHOW SPINNER + DISABLE BUTTON
+        spinner.classList.remove("hidden");
+        submitText.textContent = "Mengirim...";
+        submitBtn.disabled = true;
 
         const url =
           "https://script.google.com/macros/s/AKfycbwRDQx7QdyrL9ZC4WFFHKFrWjYkfkCPrVKPYfxmpTC42a6Jr5zT70o8db-9FAMg5c5s/exec?" +
@@ -121,6 +133,11 @@
 
         const res = await fetch(url);
         const text = await res.text();
+
+        // HIDE SPINNER + ENABLE BUTTON
+        spinner.classList.add("hidden");
+        submitText.textContent = "Kirim Aspirasi";
+        submitBtn.disabled = false;
 
         if (text.trim() === "OK") {
           modal.classList.remove("opacity-0", "pointer-events-none");

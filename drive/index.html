@@ -111,15 +111,11 @@
       $(document).ready(function () {
         $("#docTable").DataTable({
           ajax: {
-            url: "https://script.google.com/macros/s/AKfycbwaxBhNQmrPpF5DiK_o2D0zaazB_J-MNvyVVOUQL64UPf10NuqlTaeCuqDLi6N5Lw-LkA/exec",
+            url: "/drive.json", // ← tinggal ganti lokasi JSON
             dataSrc: "",
           },
-
-          // TIDAK pakai responsive collapse
           responsive: false,
-
-          scrollX: true, // penting agar table bisa digeser
-
+          scrollX: true,
           columns: [
             {
               title: "Tanggal",
@@ -139,11 +135,11 @@
               data: "link",
               render: function (data) {
                 return `
-                  <a href="${data}" target="_blank"
-                    class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg">
-                    Buka Drive
-                  </a>
-                `;
+            <a href="${data}" target="_blank"
+              class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg">
+              Buka Drive
+            </a>
+          `;
               },
             },
           ],
