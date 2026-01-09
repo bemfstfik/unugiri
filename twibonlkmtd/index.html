@@ -104,7 +104,8 @@
           </div>
         </div>
       </section>
-      <!-- KAMPANYE LKMTD 2026 -->
+
+      <!-- KAMPANYE LKMTD 2026 (di bawah section sesuai permintaanmu) -->
       <section class="max-w-5xl mx-auto mt-12 px-2">
         <div class="rounded-3xl border border-purple-100 bg-white p-6 md:p-8 shadow-lg">
           <div class="flex items-start gap-4">
@@ -114,11 +115,10 @@
 
             <div class="flex-1">
               <h2 class="text-2xl md:text-3xl font-extrabold text-[#5A007A]">Ayo Ikut Kampanye LKMTD 2026!</h2>
-              <p class="mt-2 text-gray-700 leading-relaxed">Tunjukkan dukunganmu dengan Twibbon resmi dan bagikan ke media sosial. Gunakan caption berikut agar kampanye kita semakin luas 🌟</p>
+              <p class="mt-2 text-gray-700 leading-relaxed">Upload foto, atur posisinya, simpan, lalu bagikan ke Instagram Story / WhatsApp. Pakai caption berikut supaya kampanye makin luas 🌟</p>
             </div>
           </div>
 
-          <!-- CAPTION -->
           <div class="mt-6 rounded-2xl border border-purple-100 bg-purple-50 p-5">
             <p class="text-sm font-bold text-gray-800 mb-2">Contoh Caption Kampanye:</p>
 
@@ -128,15 +128,10 @@
               Saatnya bertumbuh, berdaya, dan berkontribusi untuk perubahan yang lebih baik!
             </p>
 
-            <p class="mt-3 font-semibold text-[#5A007A]">#LKMTD2026 #BEMFSTFIK #UNUGIRI</p>
+            <p class="mt-3 font-semibold text-[#5A007A]">#LKMTD2026 #BEMFSTFIK #SiapMengikuti #MahasiswaBerdaya</p>
           </div>
 
-          <!-- CATATAN -->
-          <p class="mt-4 text-sm text-gray-500">
-            📌 Jangan lupa tag akun
-            <span class="font-semibold text-[#5A007A]">@bemfstfikunugiri</span>
-            saat membagikan Twibbon.
-          </p>
+          <p class="mt-4 text-sm text-gray-500">📌 Jangan lupa tag akun <span class="font-semibold text-[#5A007A]">@bemfstfik.unugiri</span> saat membagikan Twibbon.</p>
         </div>
       </section>
     </main>
@@ -214,7 +209,7 @@
       window.addEventListener("orientationchange", resizeCanvas);
       resizeCanvas();
 
-      // --- 2. LOAD FRAME TWIBBON ---
+      // --- 2. LOAD FRAME TWIBBON (dibuat "tembus klik" total) ---
       function loadTwibbonFrame() {
         fabric.Image.fromURL(
           CONFIG.twibbonUrl,
@@ -235,11 +230,13 @@
               scaleX: CONFIG.canvasSize / img.width,
               scaleY: CONFIG.canvasSize / img.height,
               selectable: false,
-              evented: false,
+              evented: false, // klik tembus
               lockMovementX: true,
               lockMovementY: true,
               hasControls: false,
               hasBorders: false,
+              hoverCursor: "default",
+              perPixelTargetFind: false, // penting: frame tidak ikut hit-test pixel
             });
 
             frameImgNode = img;
@@ -252,7 +249,7 @@
 
       loadTwibbonFrame();
 
-      // --- 3. HANDLE UPLOAD FOTO USER ---
+      // --- 3. HANDLE UPLOAD FOTO USER (drag dari mana saja) ---
       const uploadInput = document.getElementById("uploadImg");
       const controlsArea = document.getElementById("controlsArea");
       const scaleSlider = document.getElementById("scaleSlider");
@@ -285,15 +282,23 @@
               originY: "center",
               scaleX: coverScale,
               scaleY: coverScale,
+
               selectable: true,
               evented: true,
+
+              // Twibbonize-like: drag dari mana saja (tanpa harus pojok)
+              hasControls: false,
+              hasBorders: false,
               lockUniScaling: true,
-              cornerStyle: "circle",
-              transparentCorners: false,
+
+              perPixelTargetFind: true, // kunci: klik di area foto mana pun
+              hoverCursor: "move",
             });
 
             userImgNode = img;
             canvas.add(userImgNode);
+
+            // langsung aktif biar sekali klik/geser jalan
             canvas.setActiveObject(userImgNode);
 
             // Slider sync
@@ -307,6 +312,11 @@
           });
         };
         reader.readAsDataURL(file);
+      });
+
+      // Biar tap/click di canvas langsung "megang" foto (opsional tapi bikin enak)
+      canvas.on("mouse:down", function () {
+        if (userImgNode) canvas.setActiveObject(userImgNode);
       });
 
       // --- 4. HANDLE SLIDER ZOOM ---
