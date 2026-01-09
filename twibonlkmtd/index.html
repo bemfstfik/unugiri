@@ -7,9 +7,7 @@
     <link rel="icon" type="image/png" href="/assets/images/KABINET.png.png" />
 
     <script src="https://cdn.tailwindcss.com"></script>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
@@ -17,35 +15,32 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
 
     <style>
-      /* Styling Container Canvas agar Responsif */
       .canvas-wrapper {
         position: relative;
         width: 100%;
-        max-width: 500px; /* Batas lebar tampilan di HP/Web */
+        max-width: 500px;
         margin: 0 auto;
-        aspect-ratio: 1 / 1; /* Memaksa kotak persegi */
+        aspect-ratio: 1 / 1;
         background-color: #e5e7eb;
+        background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+        background-size: 20px 20px;
         border: 2px dashed #900bb7;
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 
-        /* PENTING UNTUK MOBILE: Mencegah scroll saat drag di canvas */
+        /* PENTING: Mencegah scroll layar saat geser foto di HP */
         touch-action: none;
       }
 
-      /* Canvas Fabric sebenarnya */
       .canvas-container {
         margin: 0 auto !important;
       }
-
-      /* Pastikan elemen canvas ngisi wrapper */
       #twibbonCanvas {
         display: block;
         width: 100%;
         height: 100%;
       }
-
       input[type="range"] {
         accent-color: #900bb7;
       }
@@ -54,6 +49,7 @@
 
   <body class="bg-gray-50 font-inter">
     <div id="navbar"></div>
+
     <main class="flex-grow max-w-7xl mx-auto px-6 pb-16">
       <nav aria-label="breadcrumb" class="bg-white rounded-xl shadow-md max-w-3xl mx-auto mt-6">
         <ol class="flex items-center gap-1 text-gray-700 font-semibold text-lg rounded-xl px-6 py-4">
@@ -74,7 +70,11 @@
             <div class="canvas-wrapper" id="canvasWrapper">
               <canvas id="twibbonCanvas"></canvas>
             </div>
-            <p class="text-center text-sm text-gray-400 mt-3 animate-pulse"><i class="fas fa-hand-pointer"></i> Geser & Cubit foto untuk mengatur posisi</p>
+
+            <div class="mt-4 flex items-center gap-2 text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full animate-pulse">
+              <i class="fas fa-arrows-alt text-[#900BB7]"></i>
+              <span>Klik & Geser di mana saja</span>
+            </div>
           </div>
 
           <div class="order-1 md:order-2 space-y-6">
@@ -137,111 +137,79 @@
     </main>
 
     <div class="fixed bottom-6 left-6 z-50">
-      <button id="layanan110Btn" class="bg-[#900BB7] hover:bg-[#6A008C] text-white font-bold py-3 px-5 rounded-full shadow-lg transition-all flex items-center gap-2 group">
-        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/20">
-          <i class="fas fa-bullhorn text-sm"></i>
-        </span>
-        Aspirasi
-      </button>
+      <button id="layanan110Btn" class="bg-[#900BB7] hover:bg-[#6A008C] text-white font-bold py-3 px-5 rounded-full shadow-lg flex items-center gap-2"><i class="fas fa-bullhorn"></i> Aspirasi</button>
     </div>
 
     <div id="layanan110Modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 transform transition-all scale-100">
+      <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
         <h2 class="text-xl font-bold mb-4 text-[#900BB7]">Layanan Aspirasi</h2>
-        <p class="mb-6 text-gray-600 leading-relaxed">Sampaikan kritik dan saran Anda untuk kemajuan BEM FST & FIK.</p>
         <div class="flex justify-end gap-3">
-          <button id="closeModalBtn" class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-5 rounded-lg font-medium">Tutup</button>
-          <a href="#" class="bg-[#900BB7] hover:bg-[#6A008C] text-white py-2 px-5 rounded-lg font-bold shadow-md">Kirim</a>
+          <button id="closeModalBtn" class="bg-gray-100 text-gray-700 py-2 px-5 rounded-lg">Tutup</button>
         </div>
       </div>
     </div>
 
     <script>
-      /**
-       * KONFIGURASI PENTING
-       */
       const CONFIG = {
-        canvasSize: 1080, // Resolusi asli output (HD)
+        canvasSize: 1080,
         twibbonUrl: "/assets/images/twibon_LKMTD.png",
       };
 
-      // Inisialisasi Fabric Canvas (internal tetap 1080x1080)
       const canvas = new fabric.Canvas("twibbonCanvas", {
         width: CONFIG.canvasSize,
         height: CONFIG.canvasSize,
         backgroundColor: "#ffffff",
-        preserveObjectStacking: true, // Layering tetap terjaga
-        selection: false, // Matikan selection box biru (multiple select)
-        stopContextMenu: true, // Disable klik kanan menu di canvas
+        preserveObjectStacking: true,
+        selection: false, // Kita handle manual
+        stopContextMenu: true,
       });
-
-      // Optimasi rendering untuk mobile
       canvas.enableRetinaScaling = false;
 
       let userImgNode = null;
       let frameImgNode = null;
       let currentZoom = 1;
 
-      // Pastikan urutan layer selalu benar
+      // Variabel untuk Custom Drag Logic
+      let isDragging = false;
+      let lastPosX = 0;
+      let lastPosY = 0;
+
+      // --- LAYERING ---
       function ensureLayerOrder() {
+        // Pastikan Frame selalu di Index Tertinggi (Depan)
         if (userImgNode) userImgNode.moveTo(0);
         if (frameImgNode) frameImgNode.bringToFront();
         canvas.requestRenderAll();
       }
 
-      // --- 1. SETUP RESPONSIVE DISPLAY (CSS-only + viewport transform) ---
+      // --- RESPONSIF ---
       function resizeCanvas() {
         const wrapper = document.getElementById("canvasWrapper");
-        // Ambil lebar container (pixel CSS)
         const size = Math.max(1, Math.floor(wrapper.getBoundingClientRect().width));
-
-        // Hitung rasio zoom agar internal 1080 fit di layar HP
         currentZoom = size / CONFIG.canvasSize;
-
-        // Ubah ukuran tampilan saja (CSS), bukan internal coordinate
         canvas.setDimensions({ width: size, height: size }, { cssOnly: true });
-
-        // Set viewport transform biar objek tetap di koordinat 1080
-        // [scaleX, skewY, skewX, scaleY, translateX, translateY]
         canvas.setViewportTransform([currentZoom, 0, 0, currentZoom, 0, 0]);
-
-        canvas.calcOffset();
         canvas.requestRenderAll();
       }
-
       window.addEventListener("resize", resizeCanvas);
-      window.addEventListener("orientationchange", resizeCanvas);
-      resizeCanvas(); // Panggil saat awal load
+      resizeCanvas();
 
-      // --- 2. LOAD FRAME TWIBBON (dibuat "tembus klik" total) ---
+      // --- LOAD FRAME ---
       function loadTwibbonFrame() {
         fabric.Image.fromURL(
           CONFIG.twibbonUrl,
           (img) => {
-            if (!img) {
-              console.error("Gagal memuat Twibbon. Cek path file.");
-              alert("Gambar Frame Twibbon tidak ditemukan di: " + CONFIG.twibbonUrl);
-              return;
-            }
-
+            if (!img) return;
             if (frameImgNode) canvas.remove(frameImgNode);
 
-            // Atur properti frame agar BENAR-BENAR PASIF
             img.set({
               left: 0,
               top: 0,
-              originX: "left",
-              originY: "top",
               scaleX: CONFIG.canvasSize / img.width,
               scaleY: CONFIG.canvasSize / img.height,
-              selectable: false, // Tidak bisa dipilih
-              evented: false, // PENTING: klik tembus ke belakang
-              lockMovementX: true,
-              lockMovementY: true,
-              hasControls: false,
-              hasBorders: false,
-              hoverCursor: "default",
-              perPixelTargetFind: false, // penting: frame tidak ikut hit-test pixel
+              selectable: false, // Tidak bisa dipilih via Fabric
+              evented: false, // Tembus klik
+              opacity: 1,
             });
 
             frameImgNode = img;
@@ -251,19 +219,81 @@
           { crossOrigin: "anonymous" }
         );
       }
-
-      // Jalankan fungsi load frame
       loadTwibbonFrame();
 
-      // --- 3. HANDLE UPLOAD FOTO USER (drag dari mana saja) ---
+      // --- CUSTOM DRAG LOGIC (The Magic Part) ---
+      // Kita pakai event Canvas langsung, bukan Object
+
+      canvas.on("mouse:down", function (opt) {
+        // Hanya mulai drag jika foto user sudah ada
+        if (!userImgNode) return;
+
+        const evt = opt.e;
+        isDragging = true;
+
+        // Ambil posisi mouse/touch awal
+        if (evt.type === "touchstart") {
+          lastPosX = evt.touches[0].clientX;
+          lastPosY = evt.touches[0].clientY;
+        } else {
+          lastPosX = evt.clientX;
+          lastPosY = evt.clientY;
+        }
+
+        // EFEK VISUAL: Frame jadi transparan
+        if (frameImgNode) {
+          frameImgNode.set("opacity", 0.5); // Samar 0.5
+        }
+
+        canvas.requestRenderAll();
+      });
+
+      canvas.on("mouse:move", function (opt) {
+        if (!isDragging || !userImgNode) return;
+
+        const evt = opt.e;
+        let currX, currY;
+
+        if (evt.type === "touchmove") {
+          currX = evt.touches[0].clientX;
+          currY = evt.touches[0].clientY;
+        } else {
+          currX = evt.clientX;
+          currY = evt.clientY;
+        }
+
+        // Hitung selisih gerakan mouse (Delta)
+        // Kita bagi dengan currentZoom agar gerakan 1:1 mengikuti jari di layar HP
+        const deltaX = (currX - lastPosX) / currentZoom;
+        const deltaY = (currY - lastPosY) / currentZoom;
+
+        // Pindahkan Foto
+        userImgNode.left += deltaX;
+        userImgNode.top += deltaY;
+        userImgNode.setCoords(); // Update koordinat internal
+
+        // Simpan posisi terakhir
+        lastPosX = currX;
+        lastPosY = currY;
+
+        canvas.requestRenderAll();
+      });
+
+      canvas.on("mouse:up", function () {
+        isDragging = false;
+
+        // EFEK VISUAL: Balikkan Frame jadi Normal
+        if (frameImgNode) {
+          frameImgNode.set("opacity", 1); // Full terlihat
+        }
+
+        canvas.requestRenderAll();
+      });
+
+      // --- UPLOAD FOTO ---
       const uploadInput = document.getElementById("uploadImg");
       const controlsArea = document.getElementById("controlsArea");
       const scaleSlider = document.getElementById("scaleSlider");
-
-      function showControls() {
-        controlsArea.classList.remove("hidden");
-        setTimeout(() => controlsArea.classList.remove("opacity-0"), 100);
-      }
 
       uploadInput.addEventListener("change", function (e) {
         const file = e.target.files && e.target.files[0];
@@ -271,15 +301,11 @@
 
         const reader = new FileReader();
         reader.onload = function (f) {
-          const data = f.target.result;
-
-          fabric.Image.fromURL(data, function (img) {
+          fabric.Image.fromURL(f.target.result, function (img) {
             if (!img) return;
-
-            // Hapus foto lama
             if (userImgNode) canvas.remove(userImgNode);
 
-            // Skala supaya menutup canvas (cover)
+            // Hitung skala cover
             const coverScale = Math.max(CONFIG.canvasSize / img.width, CONFIG.canvasSize / img.height);
 
             img.set({
@@ -289,94 +315,75 @@
               originY: "center",
               scaleX: coverScale,
               scaleY: coverScale,
-
-              selectable: true,
-              evented: true,
-
-              // Twibbonize-like: drag dari mana saja (tanpa harus pojok)
-              hasControls: false, // Hilangkan kotak resize di pojok (pakai slider saja)
-              hasBorders: false, // Hilangkan border seleksi
-              lockUniScaling: true,
-
-              perPixelTargetFind: true, // kunci: klik di area foto mana pun
-              hoverCursor: "move",
+              selectable: false, // Kita matikan seleksi bawaan fabric
+              evented: false, // Kita matikan event bawaan fabric
             });
 
             userImgNode = img;
             canvas.add(userImgNode);
 
-            // langsung aktif biar sekali klik/geser jalan
-            canvas.setActiveObject(userImgNode);
-
-            // Slider sync
-            // Set max slider dinamis (misal 2x dari ukuran cover)
-            const baseMax = 3;
-            const newMax = Math.max(baseMax, coverScale * 2);
-            scaleSlider.max = String(newMax);
+            // Set slider values
+            scaleSlider.max = String(Math.max(3, coverScale * 2));
             scaleSlider.value = String(coverScale);
 
             ensureLayerOrder();
-            showControls();
+            controlsArea.classList.remove("hidden");
+            setTimeout(() => controlsArea.classList.remove("opacity-0"), 100);
           });
         };
         reader.readAsDataURL(file);
       });
 
-      // Biar tap/click di canvas langsung "megang" foto (opsional tapi bikin enak)
-      canvas.on("mouse:down", function () {
-        if (userImgNode) canvas.setActiveObject(userImgNode);
-      });
-
-      // --- 4. HANDLE SLIDER ZOOM ---
+      // --- SLIDER ZOOM ---
       scaleSlider.addEventListener("input", function () {
         if (!userImgNode) return;
         const v = parseFloat(this.value);
         userImgNode.set({ scaleX: v, scaleY: v });
-        userImgNode.setCoords(); // update hit-box
         canvas.requestRenderAll();
       });
 
-      // Sinkronisasi slider saat user pinch-zoom (di masa depan kalau pakai gesture module)
-      // tapi untuk sekarang slider = source of truth zoom
-      canvas.on("object:scaling", function (e) {
-        if (e.target === userImgNode) {
-          scaleSlider.value = String(e.target.scaleX);
+      // Biar frame samar juga pas mainin slider
+      scaleSlider.addEventListener("mousedown", () => {
+        if (frameImgNode) {
+          frameImgNode.opacity = 0.5;
+          canvas.requestRenderAll();
+        }
+      });
+      scaleSlider.addEventListener("touchstart", () => {
+        if (frameImgNode) {
+          frameImgNode.opacity = 0.5;
+          canvas.requestRenderAll();
+        }
+      });
+      scaleSlider.addEventListener("mouseup", () => {
+        if (frameImgNode) {
+          frameImgNode.opacity = 1;
+          canvas.requestRenderAll();
+        }
+      });
+      scaleSlider.addEventListener("touchend", () => {
+        if (frameImgNode) {
+          frameImgNode.opacity = 1;
+          canvas.requestRenderAll();
         }
       });
 
-      // --- 5. HANDLE DOWNLOAD (FIX: hasil tidak kecil) ---
+      // --- DOWNLOAD ---
       document.getElementById("downloadBtn").addEventListener("click", function () {
-        // Hilangkan seleksi sebelum download
-        canvas.discardActiveObject();
-        canvas.requestRenderAll();
+        // Pastikan normal sebelum download
+        if (frameImgNode) frameImgNode.opacity = 1;
+        canvas.renderAll();
 
-        // Simpan state tampilan responsive
-        const oldVpt = canvas.viewportTransform ? canvas.viewportTransform.slice() : [1, 0, 0, 1, 0, 0];
-        const oldCssW = canvas.getElement().style.width;
-        const oldCssH = canvas.getElement().style.height;
-
-        // Balik ke kondisi asli 1080x1080 tanpa zoom untuk export
+        const oldVpt = canvas.viewportTransform.slice();
         canvas.setViewportTransform([1, 0, 0, 1, 0, 0]);
         canvas.setDimensions({ width: CONFIG.canvasSize, height: CONFIG.canvasSize }, { cssOnly: false });
-        canvas.requestRenderAll();
 
-        // Export 1080x1080
-        const dataURL = canvas.toDataURL({
-          format: "png",
-          quality: 1,
-          multiplier: 1,
-          enableRetinaScaling: false,
-        });
+        const dataURL = canvas.toDataURL({ format: "png", quality: 1, multiplier: 1 });
 
-        // Restore ke mode responsive lagi
         canvas.setDimensions({ width: CONFIG.canvasSize, height: CONFIG.canvasSize }, { cssOnly: true });
-        canvas.getElement().style.width = oldCssW;
-        canvas.getElement().style.height = oldCssH;
         canvas.setViewportTransform(oldVpt);
-        canvas.calcOffset();
         canvas.requestRenderAll();
 
-        // Trigger Download
         const link = document.createElement("a");
         link.download = "Twibbon-LKMTD-2026.png";
         link.href = dataURL;
@@ -385,7 +392,7 @@
         document.body.removeChild(link);
       });
 
-      // --- 6. MODAL INTERACTION ---
+      // --- MODAL ---
       const modal = document.getElementById("layanan110Modal");
       document.getElementById("layanan110Btn").onclick = () => modal.classList.remove("hidden");
       document.getElementById("closeModalBtn").onclick = () => modal.classList.add("hidden");
